@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'DairyMilk';
+  src: url('./assets/fonts/DairyMilkFont-Medium.otf/DairyMilkFont-Medium.otf') format('truetype'); /* Replace with your font file path and format */
+  /* Add other font weights and styles if necessary */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: sans-serif; 
+}
+
+
+
+
+
