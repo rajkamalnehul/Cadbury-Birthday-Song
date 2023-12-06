@@ -1,20 +1,20 @@
-import React from "react";
 import BackgroundImg from "../../assets/images/background.jpg";
-
-function Layout({ children }) {
+import Navbar from "../navbar";
+function Layout({ navbar, children }) {
   return (
     <>
       <div
-        className="block w-full h-screen md:hidden"
+        className="block w-full h-screen overflow-scroll md:hidden"
         style={{
           backgroundImage: `url(${BackgroundImg})`,
           backgroundSize: "cover",
         }}
       >
-        {children}
+        {navbar && <Navbar />}
+        <div className={`${navbar ? "pt-[85px]" : ""}`}>{children}</div>
       </div>
       <div className="hidden w-full h-screen md:block">
-        <p>This app is only supported in mobile</p>
+        <p className="text-[#000]">This app is only supported in mobile</p>
       </div>
     </>
   );

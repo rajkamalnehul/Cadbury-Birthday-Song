@@ -5,7 +5,7 @@ import HamburgerIcon from "../../assets/icons/hamburger.png";
 
 function Navbar() {
   return (
-    <div className="flex justify-between px-4 py-1 gap-4 items-center bg-[#320071]">
+    <div className="flex justify-between px-4 py-1 gap-4 items-center bg-[#320071] fixed top-0 left-0 w-full z-10">
       <div className="flex items-center w-64">
         <div>
           <img src={Logo} />

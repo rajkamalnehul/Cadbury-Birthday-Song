@@ -1,12 +1,19 @@
-import Home from "./pages/home/home";
+import React, { useEffect, useState } from "react";
+import HomePage from "./pages/home";
 import Layout from "./components/layout";
-import Navbar from "./components/navbar";
+import LandingPage from "./pages/landing";
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowIntro(false);
+    }, 2000);
+  }, []);
+
   return (
-    <Layout>
-      <Navbar />
-      <Home />
+    <Layout navbar={showIntro ? false : true}>
+      {showIntro ? <LandingPage /> : <HomePage />}
     </Layout>
   );
 }
