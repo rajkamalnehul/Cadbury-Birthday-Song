@@ -1,8 +1,5 @@
 import Axios from "../utils/axios";
-// const OPENAI_API_KEY = "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";
-// const OPENAI_API_KEY_2 = "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";
-const OPENAI_API_KEY_3 = "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";
-const OPENAI_API_KEY_4 = "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";
+
 export const generateSongWithGPT = async (name, gender, genre) => {
   const genreOfSong = genre || "rap";
   const dedicatedTo =
