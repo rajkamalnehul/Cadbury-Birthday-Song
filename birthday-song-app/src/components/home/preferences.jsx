@@ -13,6 +13,11 @@ import Motivational from "../../assets/images/Motivational.png";
 import Calm from "../../assets/images/Calm.png";
 import Male from "../../assets/images/Male.png";
 import Female from "../../assets/images/Female.png";
+import { updateDetails } from "../../store/slices/userDetails";
+import { updateTab } from "../../store/slices/tab";
+import { useDispatch } from "react-redux";
+import { generateSongWithGPT } from "../../services/generateSong";
+import { useDetailsSelector } from "../../store/selectors/details";
 
 const genre = [
   {
@@ -72,6 +77,8 @@ const voice = [
 ];
 
 function Preferences() {
+  const dispatch = useDispatch();
+  const details = useDetailsSelector();
   const [preferenceDetails, setpreferenceDetails] = useState({
     mood: "",
     genre: "",
@@ -89,7 +96,9 @@ function Preferences() {
   const handleSubmit = () => {
     const { isValid, errorMessage } = validatePreference();
     if (isValid) {
-      console.log("form submitted successfully");
+      dispatch(updateDetails({ ...preferenceDetails, loading: true }));
+      generateSong(details.name, details.gender, preferenceDetails.genre);
+      dispatch(updateTab("song"));
     } else {
       alert(errorMessage);
     }
@@ -105,6 +114,19 @@ function Preferences() {
     }
 
     return { isValid, errorMessage };
+  };
+
+  const generateSong = (name, gender, genre) => {
+    generateSongWithGPT(name, gender, genre)
+      .then((data) => {
+        dispatch(
+          updateDetails({ generatedSong: data.content, loading: false })
+        );
+      })
+      .catch((err) => {
+        dispatch(updateDetails({ loading: false }));
+        alert(err);
+      });
   };
 
   return (

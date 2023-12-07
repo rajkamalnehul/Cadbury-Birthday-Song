@@ -1,5 +1,5 @@
 import Axios from "../utils/axios";
-
+const API_KEY = import.meta.env.VITE_OPEN_AI_API_KEY;
 export const generateSongWithGPT = async (name, gender, genre) => {
   const genreOfSong = genre || "rap";
   const dedicatedTo =
@@ -27,7 +27,7 @@ export const generateSongWithGPT = async (name, gender, genre) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY_4}`,
+          Authorization: `Bearer ${API_KEY}`,
         },
       }
     );

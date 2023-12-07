@@ -3,6 +3,9 @@ import GiftImg from "../../assets/images/cap&gift.png";
 import FilledInput from "../input/filledInput";
 import FilledButton from "../button/filledButton";
 import CustomSelect from "../dropdown/customSelect";
+import { updateDetails } from "../../store/slices/userDetails";
+import { updateTab } from "../../store/slices/tab";
+import { useDispatch } from "react-redux";
 
 const ageOptions = [
   {
@@ -47,20 +50,22 @@ const genderOptions = [
 ];
 
 function Details() {
+  const dispatch = useDispatch();
   const [details, setDetails] = useState({
     name: "",
     age: "",
     gender: "",
   });
 
-  const updateDetails = (type, value) => {
+  const updateLocalDetails = (type, value) => {
     setDetails({ ...details, [type]: value });
   };
 
   const handleSubmit = () => {
     const { isValid, errorMessage } = validateDetails();
     if (isValid) {
-      console.log("form submitted successfully");
+      dispatch(updateDetails(details));
+      dispatch(updateTab("preferences"));
     } else {
       alert(errorMessage);
     }
@@ -98,7 +103,7 @@ function Details() {
           label={"xxxx xxxxx"}
           type={"text"}
           value={details.name}
-          onChange={(e) => updateDetails("name", e.target.value)}
+          onChange={(e) => updateLocalDetails("name", e.target.value)}
         />
       </div>
       <div>
@@ -107,7 +112,7 @@ function Details() {
         </p>
         <CustomSelect
           className={"text-[#401272] font-semibold"}
-          onChange={(e) => updateDetails("age", e.target.value)}
+          onChange={(e) => updateLocalDetails("age", e.target.value)}
           label={"Select Age"}
           options={ageOptions}
           value={details.age}
@@ -117,7 +122,7 @@ function Details() {
         <p className="text-center text-lg font-semibold mb-2">Gender</p>
         <CustomSelect
           className={"text-[#401272] font-semibold"}
-          onChange={(e) => updateDetails("gender", e.target.value)}
+          onChange={(e) => updateLocalDetails("gender", e.target.value)}
           label={"Select Gender"}
           options={genderOptions}
           value={details.gender}

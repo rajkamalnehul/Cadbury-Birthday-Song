@@ -4,11 +4,16 @@ import FilledInput from "../input/filledInput";
 import FilledButton from "../button/filledButton";
 import RadioInput from "../input/radioInput";
 import { validateEmail, validatePhone } from "../../utils/validations";
+import { updateDetails } from "../../store/slices/userDetails";
+import { updateTab } from "../../store/slices/tab";
+import { useDispatch } from "react-redux";
+import { useDetailsSelector } from "../../store/selectors/details";
 
 function Registration() {
+  const dispatch = useDispatch();
   const [registrationDetails, setRegistrationDetails] = useState({
     phone: "",
-    name: "",
+    userName: "",
     email: "",
     terms: false,
     promotions: false,
@@ -22,7 +27,8 @@ function Registration() {
   const handleSubmit = () => {
     const { isValid, errorMessage } = validateRegistration();
     if (isValid) {
-      console.log("form submitted successfully");
+      dispatch(updateDetails(registrationDetails));
+      dispatch(updateTab("details"));
     } else {
       alert(errorMessage);
     }
@@ -35,7 +41,7 @@ function Registration() {
     if (!validatePhone(registrationDetails.phone)) {
       errorMessage = "Phone number is not valid";
       isValid = false;
-    } else if (registrationDetails.name.trim() === "") {
+    } else if (registrationDetails.userName.trim() === "") {
       errorMessage = "Enter your name";
       isValid = false;
     } else if (!validateEmail(registrationDetails.email)) {
@@ -64,8 +70,8 @@ function Registration() {
       <FilledInput
         label={"Full Name"}
         type={"text"}
-        value={registrationDetails.name}
-        onChange={(e) => updateRegistrationDetails("name", e.target.value)}
+        value={registrationDetails.userName}
+        onChange={(e) => updateRegistrationDetails("userName", e.target.value)}
       />
       <FilledInput
         label={"Email ID"}

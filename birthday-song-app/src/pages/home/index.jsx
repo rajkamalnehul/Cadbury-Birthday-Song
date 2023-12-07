@@ -4,26 +4,36 @@ import Registration from "../../components/home/registration";
 import Details from "../../components/home/details";
 import Preferences from "../../components/home/preferences";
 import Song from "../../components/home/song";
+import { useTabSelector } from "../../store/selectors/tab";
+import { useDetailsSelector } from "../../store/selectors/details";
+// import { updateTab } from "../../store/slices/tab";
+// import { useDispatch } from "react-redux";
 
 function HomePage() {
-  const [activeTab, setActiveTab] = useState("registration");
+  const activeTab = useTabSelector();
+  const details = useDetailsSelector();
+  console.log(details);
 
   const tabList = [
     {
       key: "Registration",
       value: "registration",
+      id: 0,
     },
     {
       key: "Details",
       value: "details",
+      id: 1,
     },
     {
       key: "Preferences",
       value: "preferences",
+      id: 2,
     },
     {
       key: "Song",
       value: "song",
+      id: 3,
     },
   ];
 
@@ -46,16 +56,13 @@ function HomePage() {
     },
   ];
 
-  const updateTab = (value) => {
-    setActiveTab(value);
-  };
   return (
     <div>
       <Tab
         items={tabList}
         defaultTab="registration"
         sticky
-        onChange={(value) => updateTab(value)}
+        onChange={(value) => {}}
         value={activeTab}
         containerClass="flex justify-center"
       />
