@@ -1,6 +1,6 @@
 const endPoints = {
   // chat gpt
-  chatWithGpt: () => "engines/davinci/completions",
+  chatWithGpt: () => "chat/completion",
 };
 
 export default endPoints;

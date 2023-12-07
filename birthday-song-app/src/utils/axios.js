@@ -1,13 +1,7 @@
 import axios from "axios";
-// import {
-//   SERVER_API_URL,
-//   SERVER_CHAT_API_URL,
-//   CUSTOMER_RESERVATION_API_URL,
-//   SERVER_CALENDAR_API_URL,
-// } from "src/constants/api";
-
+const SERVER_API_URL = "https://api.openai.com/v1/";
 const Axios = axios.create({
-  //  baseURL: SERVER_API_URL,
+  baseURL: SERVER_API_URL,
 });
 
 export default Axios;
