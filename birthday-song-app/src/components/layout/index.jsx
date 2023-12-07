@@ -4,7 +4,7 @@ function Layout({ navbar, children }) {
   return (
     <>
       <div
-        className="block w-full h-screen overflow-scroll md:hidden"
+        className="block w-full h-screen overflow-y-scroll pb-[85px] md:hidden"
         style={{
           backgroundImage: `url(${BackgroundImg})`,
           backgroundSize: "cover",
