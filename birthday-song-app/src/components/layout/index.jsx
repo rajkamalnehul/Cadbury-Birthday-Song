@@ -11,9 +11,7 @@ function Layout({ navbar, children }) {
         }}
       >
         {navbar && <Navbar />}
-        <div className={`${navbar ? "pt-[85px]" : ""} overflow-scroll`}>
-          {children}
-        </div>
+        <div className={`${navbar ? "pt-[85px]" : ""}`}>{children}</div>
       </div>
       <div className="hidden w-full h-screen md:block">
         <p className="text-[#000]">This app is only supported in mobile</p>
